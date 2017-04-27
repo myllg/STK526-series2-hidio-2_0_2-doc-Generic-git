@@ -98,7 +98,7 @@
       //! @defgroup STK_5226_joy Joystick Management
       //! Macros to manage Joystick on stk526
       //! @{
-#define  Joy_init()              (DDRB &= ~((1<<PIND1)|(1<<PIND3)|(1<<PIND0)|(1<<PIND2)|(1<<PIND4)), PORTD |= ((1<<PIND1)|(1<<PIND3)|(1<<PIND0)|(1<<PIND2)|(1<<PIND4)))
+#define  Joy_init()              (DDRD &= ~((1<<PIND1)|(1<<PIND3)|(1<<PIND0)|(1<<PIND2)|(1<<PIND4)), PORTD |= ((1<<PIND1)|(1<<PIND3)|(1<<PIND0)|(1<<PIND2)|(1<<PIND4)))
 #define  Push_button_init()      Joy_init()
                                 
 #define  Is_btn_left()           Is_hwb()
