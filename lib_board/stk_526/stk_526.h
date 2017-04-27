@@ -62,14 +62,14 @@
       //! @defgroup STK_526_leds Leds Management
       //! Macros to manage Leds on stk526
       //! @{
-#define  LED_PORT  PORTD
-#define  LED_DDR   DDRD
-#define  LED_PIN   PIND
+#define  LED_PORT  PORTB
+#define  LED_DDR   DDRB
+#define  LED_PIN   PINB
 
-#define  LED0_BIT  PIND0
-#define  LED1_BIT  PIND1
-#define  LED2_BIT  PIND4
-#define  LED3_BIT  PIND5
+#define  LED0_BIT  PINB0
+#define  LED1_BIT  PINB1
+#define  LED2_BIT  PINB4
+#define  LED3_BIT  PINB5
 
 #define  Leds_init()             (LED_DDR  |=  (1<<LED0_BIT)|(1<<LED1_BIT)|(1<<LED2_BIT)|(1<<LED3_BIT), Leds_off())
 #define  Leds_on()               (LED_PORT |=  (1<<LED0_BIT)|(1<<LED1_BIT)|(1<<LED2_BIT)|(1<<LED3_BIT))
@@ -98,26 +98,26 @@
       //! @defgroup STK_5226_joy Joystick Management
       //! Macros to manage Joystick on stk526
       //! @{
-#define  Joy_init()              (DDRB &= ~((1<<PINB7)|(1<<PINB6)|(1<<PINB5)|(1<<PINB4)|(1<<PINB0)), PORTB |= ((1<<PINB7)|(1<<PINB6)|(1<<PINB5)|(1<<PINB4)|(1<<PINB0)))
+#define  Joy_init()              (DDRB &= ~((1<<PIND1)|(1<<PIND3)|(1<<PIND0)|(1<<PIND2)|(1<<PIND4)), PORTD |= ((1<<PIND1)|(1<<PIND3)|(1<<PIND0)|(1<<PIND2)|(1<<PIND4)))
 #define  Push_button_init()      Joy_init()
                                 
 #define  Is_btn_left()           Is_hwb()
-#define  Is_btn_middle()         ((PINB & (1<<PINB0)) ?  FALSE : TRUE)
+#define  Is_btn_middle()         ((PIND & (1<<PIND4)) ?  FALSE : TRUE)
 #define  Is_btn_right()          FALSE
 
-#define  Is_joy_down()           ((PINB & (1<<PINB7)) ?  FALSE : TRUE)
-#define  Is_joy_right()          ((PINB & (1<<PINB6)) ?  FALSE : TRUE)
-#define  Is_joy_up()             ((PINB & (1<<PINB5)) ?  FALSE : TRUE)
-#define  Is_joy_left()           ((PINB & (1<<PINB4)) ?  FALSE : TRUE)
+#define  Is_joy_down()           ((PIND & (1<<PIND1)) ?  FALSE : TRUE)
+#define  Is_joy_right()          ((PIND & (1<<PIND3)) ?  FALSE : TRUE)
+#define  Is_joy_up()             ((PIND & (1<<PIND0)) ?  FALSE : TRUE)
+#define  Is_joy_left()           ((PIND & (1<<PIND2)) ?  FALSE : TRUE)
                                 
 #define  Is_btn_not_left()       Is_not_hwb()
-#define  Is_btn_not_middle()     ((PINB & (1<<PINB0)) ?  TRUE : FALSE)
+#define  Is_btn_not_middle()     ((PIND & (1<<PIND4)) ?  TRUE : FALSE)
 #define  Is_btn_not_right()      TRUE
 
-#define  Is_joy_not_down()       ((PINB & (1<<PINB7)) ?  TRUE : FALSE)
-#define  Is_joy_not_right()      ((PINB & (1<<PINB6)) ?  TRUE : FALSE)
-#define  Is_joy_not_up()         ((PINB & (1<<PINB5)) ?  TRUE : FALSE)
-#define  Is_joy_not_left()       ((PINB & (1<<PINB4)) ?  TRUE : FALSE)
+#define  Is_joy_not_down()       ((PIND & (1<<PIND1)) ?  TRUE : FALSE)
+#define  Is_joy_not_right()      ((PIND & (1<<PIND3)) ?  TRUE : FALSE)
+#define  Is_joy_not_up()         ((PIND & (1<<PIND0)) ?  TRUE : FALSE)
+#define  Is_joy_not_left()       ((PIND & (1<<PIND2)) ?  TRUE : FALSE)
 
 
 //! Enable interrupts for switches (PINB0 and PINB4 to PINB7)
@@ -144,9 +144,9 @@
       //! HWB button is connected to PD7 and can also
       //! be used as generic push button
       //! @{
-#define  Hwb_button_init()       (DDRD &= ~(1<<PIND7))
-#define  Is_hwb()                ((PIND & (1<<PIND7)) ? FALSE : TRUE)
-#define  Is_not_hwb()            ((PIND & (1<<PIND7)) ? TRUE : FALSE)
+#define  Hwb_button_init()       (DDRD &= ~(1<<PIND2))
+#define  Is_hwb()                ((PIND & (1<<PIND2)) ? FALSE : TRUE)
+#define  Is_not_hwb()            ((PIND & (1<<PIND2)) ? TRUE : FALSE)
       //! @}
 
 
