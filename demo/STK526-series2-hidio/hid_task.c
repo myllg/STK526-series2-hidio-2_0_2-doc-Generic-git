@@ -153,23 +153,32 @@ void hid_report_in(void)
       return;                                // Not ready to send report
    
    // Build the Joytick report
-   if(Is_joy_up()|| Is_joy_down() || Is_joy_right() || Is_joy_left() )
+   if(Is_joy_up())//Is_joy_up()|| Is_joy_down() || Is_joy_right() || Is_joy_left() 
    {
      joy=0x01;
+   }else if(Is_joy_down())
+   {
+     joy=0x02;
+   }else if(Is_joy_left()){
+     joy=0x04;
+   }else if(Is_joy_right()){
+     joy=0x08;
    }
    if(joy==g_last_joy)
       return;                                // Same report then no send report
    g_last_joy=joy;
   
    // Send report
+   //Usb_write_byte(2);
    Usb_write_byte(g_last_joy);               // Joystick
-   Usb_write_byte(GPIOR1);                   // Dummy (not used)
-   Usb_write_byte(GPIOR1);                   // Dummy (not used)
-   Usb_write_byte(GPIOR1);                   // Dummy (not used)
-   Usb_write_byte(GPIOR1);                   // Dummy (not used)
-   Usb_write_byte(GPIOR1);                   // Dummy (not used)
-   Usb_write_byte(GPIOR1);                   // Dummy (not used)
-   Usb_write_byte(GPIOR1);                   // Dummy (not used)
+   //Usb_write_byte(0);                   // Dummy (not used)
+   //Usb_write_byte(0);                   // Dummy (not used)
+   //Usb_write_byte(0);                   // Dummy (not used)
+   //Usb_write_byte(0);                   // Dummy (not used)
+   //Usb_write_byte(0);                   // Dummy (not used)
+   //Usb_write_byte(0);                   // Dummy (not used)
+   //Usb_write_byte(0);                   // Dummy (not used)
+   //Usb_write_byte(0);                   // Dummy (not used)
    Usb_ack_in_ready();                       // Send data over the USB
 }
 

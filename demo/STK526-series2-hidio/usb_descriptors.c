@@ -126,7 +126,7 @@ code S_usb_user_configuration_descriptor usb_conf_desc = {
  , EP_ATTRIBUTES_1
  , Usb_write_word_enum_struc(EP_SIZE_1)
  , EP_INTERVAL_1
- }
+ }/*
  ,
   { sizeof(S_usb_endpoint_descriptor)
  , DESCRIPTOR_ENDPOINT
@@ -134,7 +134,7 @@ code S_usb_user_configuration_descriptor usb_conf_desc = {
  , EP_ATTRIBUTES_2
  , Usb_write_word_enum_struc(EP_SIZE_2)
  , EP_INTERVAL_2
- }
+ }*/
 };
 
 
@@ -180,12 +180,176 @@ code S_usb_language_id usb_user_language_id = {
 
 
 code S_usb_hid_report_descriptor usb_hid_report_descriptor = {{
-      0x06, 0xFF, 0xFF,         // 04|2   , Usage Page (vendordefined?)
+    0x05, 0x0c,                    // USAGE_PAGE (Consumer Devices)
+    0x09, 0x01,                    // USAGE (Consumer Control)
+    0xa1, 0x01,                    // COLLECTION (Application)
+    0x05, 0x0c,                    //   USAGE_PAGE (Consumer Devices)
+    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
+    0x25, 0x01,                    //   LOGICAL_MAXIMUM (1)
+    0x75, 0x01,                    //   REPORT_SIZE (1)
+    0x95, 0x08,                    //   REPORT_COUNT (10)
+
+    0x09, 0xe9,                    //   USAGE (Volume Up)0x01
+    0x09, 0xea,                    //   USAGE (Volume Down)0x02
+    0x09, 0x6f,                    //   USAGE (brightness Up)0x04
+    0x09, 0x70,                    //   USAGE (brightness Down)0x08
+	0x09, 0x72,                    //   USAGE (Unassigned)0x10
+	0x09, 0x00,                    //   USAGE (brightness Down)0x20
+	0x09, 0x00,                    //   USAGE (Unassigned)
+	0x09, 0x00,                    //   USAGE (Unassigned)
+//	0x09, 0x00,                    //   USAGE ()
+    0x81, 0x02,                    //   INPUT (Data,Var,Abs)
+//    0x95, 0x06,                    //   REPORT_COUNT (6)
+//	0x75, 0x01,                    //   REPORT_SIZE (1)
+//    0x81, 0x01,                    //   INPUT (Cnst,Ary,Abs)
+    0xc0
+/*
+      0x05, 0x0c,//0x06, 0xFF, 0xFF,         // 04|2   , Usage Page (vendordefined?)
+      0x09, 0x01,               // 08|1   , Usage      (vendordefined
+      0xA1, 0x01,               // A0|1   , Collection (Application)
+	  0x85, 0x01,
+      // IN report
+//      0x09, 0x02,               // 08|1   , Usage      (vendordefined)
+//      0x09, 0x03,               // 08|1   , Usage      (vendordefined)
+	  0x05, 0x0c,
+      0x15, 0x00,               // 14|1   , Logical Minimum(0 for signed byte?)
+      0x25, 0x01,
+//      0x26 ,0xFF,0x00,           // 24|1   , Logical Maximum(255 for signed byte?)
+      0x75, 0x08,               // 74|1   , Report Size(8) = field size in bits = 1 byte
+      0x95, 0x02,   // 94|1:ReportCount(size) = repeat count of previous item
+	  0x09, 0xe9,                    //   USAGE (Volume Up)
+      0x09, 0xea,                    //   USAGE (Volume Down)
+      0x81, 0x02,               // 80|1: IN report (Data,Variable, Absolute)
+
+      // OUT report
+/*      0x09, 0x04,               // 08|1   , Usage      (vendordefined)
+      0x09, 0x05,               // 08|1   , Usage      (vendordefined)
+      0x15, 0x00,               // 14|1   , Logical Minimum(0 for signed byte?)
+      0x26, 0xFF,0x00,           // 24|1   , Logical Maximum(255 for signed byte?)
+      0x75, 0x08,               // 74|1   , Report Size(8) = field size in bits = 1 byte
+      0x95, LENGTH_OF_REPORT_OUT,   // 94|1:ReportCount(size) = repeat count of previous item
+      0x91, 0x02,               // 90|1: OUT report (Data,Variable, Absolute)
+*/
+      // Feature report
+/*      0x09, 0x06,               // 08|1   , Usage      (vendordefined)
+      0x09, 0x07,               // 08|1   , Usage      (vendordefined)
+      0x15, 0x00,               // 14|1   , LogicalMinimum(0 for signed byte)
+      0x26, 0xFF,0x00,          // 24|1   , Logical Maximum(255 for signed byte)
+      0x75, 0x08,               // 74|1   , Report Size(8) =field size in bits = 1 byte
+      0x95, 0x04,               // 94|1:ReportCount
+      0xB1, 0x02,               // B0|1:   Feature report
+	  */
+/*      0xC0,                      // C0|0    , End Collection
+
+    0x05, 0x0c,                    // USAGE_PAGE (Consumer Devices)
+    0x09, 0x01,                    // USAGE (Consumer Control)
+    0xa1, 0x01,                    // COLLECTION (Application)
+	0x85, 0x02,                    // REPORT ID
+    0x05, 0x0c,                    //   USAGE_PAGE (Consumer Devices)
+    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
+    0x25, 0x01,                    //   LOGICAL_MAXIMUM (1)
+    0x75, 0x01,                    //   REPORT_SIZE (1)
+    0x95, 0x0a,                    //   REPORT_COUNT (10)
+
+    0x09, 0xe9,                    //   USAGE (Volume Up)0x01
+    0x09, 0xea,                    //   USAGE (Volume Down)0x02
+    0x09, 0x6f,                    //   USAGE (brightness Up)0x04
+    0x09, 0x72,                    //   USAGE (Unassigned)0x08
+	0x09, 0x72,                    //   USAGE (Unassigned)0x10
+	0x09, 0x70,                    //   USAGE (brightness Down)0x20
+	0x09, 0x00,                    //   USAGE (Unassigned)
+	0x09, 0x00,                    //   USAGE (Unassigned)
+//	0x09, 0x00,                    //   USAGE ()
+    0x81, 0x02,                    //   INPUT (Data,Var,Abs)
+    0x95, 0x06,                    //   REPORT_COUNT (6)
+    0x81, 0x01,                    //   INPUT (Cnst,Ary,Abs)
+    0xc0
+*/
+
+/*
+0x06, 0xFF, 0xFF,         // 04|2   , Usage Page (vendordefined?)
+      0x09, 0x01,               // 08|1   , Usage      (vendordefined
+      0xA1, 0x01,               // A0|1   , Collection (Application)
+	  0x85, 0x01,
+      // IN report
+      0x09, 0xE9,               // 08|1   , Usage      (vendordefined)
+      0x09, 0xEA,               // 08|1   , Usage      (vendordefined)
+      0x15, 0x00,               // 14|1   , Logical Minimum(0 for signed byte?)
+      0x26 ,0xFF,0x00,           // 24|1   , Logical Maximum(255 for signed byte?)
+      0x75, 0x08,               // 74|1   , Report Size(8) = field size in bits = 1 byte
+      0x95, LENGTH_OF_REPORT_IN,   // 94|1:ReportCount(size) = repeat count of previous item
+      0x81, 0x02,               // 80|1: IN report (Data,Variable, Absolute)
+      // OUT report
+      0x09, 0x04,               // 08|1   , Usage      (vendordefined)
+      0x09, 0x05,               // 08|1   , Usage      (vendordefined)
+      0x15, 0x00,               // 14|1   , Logical Minimum(0 for signed byte?)
+      0x26, 0xFF,0x00,           // 24|1   , Logical Maximum(255 for signed byte?)
+      0x75, 0x08,               // 74|1   , Report Size(8) = field size in bits = 1 byte
+      0x95, LENGTH_OF_REPORT_OUT,   // 94|1:ReportCount(size) = repeat count of previous item
+      0x91, 0x02,               // 90|1: OUT report (Data,Variable, Absolute)
+      // Feature report
+      0x09, 0x06,               // 08|1   , Usage      (vendordefined)
+      0x09, 0x07,               // 08|1   , Usage      (vendordefined)
+      0x15, 0x00,               // 14|1   , LogicalMinimum(0 for signed byte)
+      0x26, 0xFF,0x00,          // 24|1   , Logical Maximum(255 for signed byte)
+      0x75, 0x08,               // 74|1   , Report Size(8) =field size in bits = 1 byte
+      0x95, 0x04,               // 94|1:ReportCount
+      0xB1, 0x02,               // B0|1:   Feature report
+      0xC0,                      // C0|0    , End Collection
+0x05, 0x0c,                    // USAGE_PAGE (Consumer Devices)
+    0x09, 0x01,                    // USAGE (Consumer Control)
+    0xa1, 0x01,                    // COLLECTION (Application)
+	0x85, 0x02,
+    0x05, 0x0c,                    //   USAGE_PAGE (Consumer Devices)
+    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
+    0x25, 0x01,                    //   LOGICAL_MAXIMUM (1)
+    0x75, 0x01,                    //   REPORT_SIZE (1)
+    0x95, 0x0a,                    //   REPORT_COUNT (10)
+    0x09, 0xe9,                    //   USAGE (Volume Up)
+    0x09, 0xea,                    //   USAGE (Volume Down)
+    0x09, 0x6f,                    //   USAGE (Unassigned)
+    0x09, 0x70,                    //   USAGE (Unassigned)
+    0x09, 0x72,                    //   USAGE (Unassigned)
+    0x09, 0xb5,                    //   USAGE (Scan Next Track)
+    0x0A, 0x2A, 0x02,                    //   USAGE (Unassigned)
+    0x0A, 0x26, 0x02,                    //   USAGE (Unassigned)
+    0x0A, 0x94, 0x01,                    //   USAGE (Unassigned)
+    0x0A, 0x92, 0x01,                    //   USAGE (Unassigned)
+    0x81, 0x02,                    //   INPUT (Data,Var,Abs)
+    0x95, 0x06,                    //   REPORT_COUNT (6)
+    0x81, 0x01,                    //   INPUT (Cnst,Ary,Abs)
+    0xc0
+*/
+
+/*    0x05, 0x0c,                    // USAGE_PAGE (Consumer Devices)
+    0x09, 0x01,                    // USAGE (Consumer Control)
+    0xa1, 0x01,                    // COLLECTION (Application)
+    0x05, 0x0c,                    //   USAGE_PAGE (Consumer Devices)
+    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
+    0x25, 0x01,                    //   LOGICAL_MAXIMUM (1)
+    0x75, 0x01,                    //   REPORT_SIZE (1)
+    0x95, 0x0a,                    //   REPORT_COUNT (10)
+    0x09, 0xe9,                    //   USAGE (Volume Up)
+    0x09, 0xea,                    //   USAGE (Volume Down)
+    0x09, 0x6f,                    //   USAGE (Unassigned)
+    0x09, 0x70,                    //   USAGE (Unassigned)
+    0x09, 0x72,                    //   USAGE (Unassigned)
+    0x09, 0xb5,                    //   USAGE (Scan Next Track)
+    0x0A, 0x2A, 0x02,                    //   USAGE (Unassigned)
+    0x0A, 0x26, 0x02,                    //   USAGE (Unassigned)
+    0x0A, 0x94, 0x01,                    //   USAGE (Unassigned)
+    0x0A, 0x92, 0x01,                    //   USAGE (Unassigned)
+    0x81, 0x02,                    //   INPUT (Data,Var,Abs)
+    0x95, 0x06,                    //   REPORT_COUNT (6)
+    0x81, 0x01,                    //   INPUT (Cnst,Ary,Abs)
+    0xc0 
+*/
+/*      0x06, 0xFF, 0xFF,         // 04|2   , Usage Page (vendordefined?)
       0x09, 0x01,               // 08|1   , Usage      (vendordefined
       0xA1, 0x01,               // A0|1   , Collection (Application)
       // IN report
-      0x09, 0x02,               // 08|1   , Usage      (vendordefined)
-      0x09, 0x03,               // 08|1   , Usage      (vendordefined)
+      0x09, 0xE9,               // 08|1   , Usage      (vendordefined)
+      0x09, 0xEA,               // 08|1   , Usage      (vendordefined)
       0x15, 0x00,               // 14|1   , Logical Minimum(0 for signed byte?)
       0x26 ,0xFF,0x00,           // 24|1   , Logical Maximum(255 for signed byte?)
       0x75, 0x08,               // 74|1   , Report Size(8) = field size in bits = 1 byte
@@ -208,6 +372,7 @@ code S_usb_hid_report_descriptor usb_hid_report_descriptor = {{
       0x95, 0x04,               // 94|1:ReportCount
       0xB1, 0x02,               // B0|1:   Feature report
       0xC0                      // C0|0    , End Collection
+*/
  }};
 
 

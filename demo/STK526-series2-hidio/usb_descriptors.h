@@ -90,7 +90,7 @@
              // USB Interface descriptor
 #define INTERFACE_NB        0          // Interface's number
 #define ALTERNATE           0
-#define NB_ENDPOINT         2
+#define NB_ENDPOINT         1
 #define INTERFACE_CLASS     HID_CLASS // HID Class
 #define INTERFACE_SUB_CLASS NO_SUBCLASS
 #define INTERFACE_PROTOCOL  NO_PROTOCOL
@@ -99,9 +99,9 @@
              // USB Endpoint 1 descriptor FS
 #define ENDPOINT_NB_1       (EP_HID_IN | USB_ENDPOINT_IN)
 #define EP_ATTRIBUTES_1     0x03          // BULK = 0x02, INTERUPT = 0x03
-#define EP_IN_LENGTH        8
+#define EP_IN_LENGTH        9//8
 #define EP_SIZE_1           EP_IN_LENGTH
-#define EP_INTERVAL_1       20 //interrupt pooling from host
+#define EP_INTERVAL_1       1//20 //interrupt pooling from host
 
              // USB Endpoint 1 descriptor FS
 #define ENDPOINT_NB_2       (EP_HID_OUT)
@@ -110,7 +110,7 @@
 #define EP_SIZE_2           EP_OUT_LENGTH
 #define EP_INTERVAL_2       20 //interrupt pooling from host
 
-#define SIZE_OF_REPORT        0x35
+#define SIZE_OF_REPORT        0x23 //35 2f 68 42 19
 #define LENGTH_OF_REPORT_IN      0x08
 #define LENGTH_OF_REPORT_OUT     0x08
 
