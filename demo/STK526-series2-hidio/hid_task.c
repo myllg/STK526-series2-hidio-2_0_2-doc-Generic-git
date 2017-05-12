@@ -164,6 +164,10 @@ void hid_report_in(void)
    }else if(Is_joy_right()){
      joy=0x08;
    }
+   else if(Is_btn_middle()){
+     joy=0x10;
+   }
+
    if(joy==g_last_joy)
       return;                                // Same report then no send report
    g_last_joy=joy;
